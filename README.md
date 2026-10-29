@@ -22,6 +22,7 @@ npm run build    # -> dist/
 | The four apps — names, blurbs, chips, links, colours | `src/data/apps.js` |
 | Version numbers | fetched from the GitHub releases API at build time (`src/lib/releases.js`), with the `fallbackVersion` in `apps.js` used if the API is unreachable |
 | Colours, type, spacing | `src/styles/global.css` — every value is a token on `:root` |
+| Screenshots | `src/assets/shots/` — imported, so Astro resizes them and converts to WebP at build time. Drop in a replacement and point `apps.js` at it; nothing else to do. App marks stay in `public/marks/` because they are used as-is |
 | The page itself | `src/pages/index.astro` |
 
 ## Routing gotcha

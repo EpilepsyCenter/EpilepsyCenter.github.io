@@ -6,8 +6,22 @@ import AppCard from '../components/AppCard.astro';
 import TraceDivider from '../components/TraceDivider.astro';
 import { apps } from '../data/apps.js';
 import { resolveVersions } from '../lib/releases.js';
+import { Image, getImage } from 'astro:assets';
 
 const releases = await resolveVersions(apps);
+
+// The grid shows each screenshot at roughly 470px, so it is served resized and
+// as WebP. The lightbox needs a readable image, not the 2880px original, so it
+// gets its own 1800px WebP variant.
+const shotApps = apps.filter((app) => app.shot);
+const fullShots = Object.fromEntries(
+  await Promise.all(
+    shotApps.map(async (app) => [
+      app.id,
+      (await getImage({ src: app.shot, width: 1800, format: 'webp', quality: 82 })).src,
+    ])
+  )
+);
 
 const title = 'Software — Epilepsy Center, Lund University';
 const description =
@@ -85,16 +99,22 @@ const description =
       </section>
 
       <section class="shots">
-        {apps
-          .filter((app) => app.shot)
-          .map((app) => (
-            <figure>
-              <a class="shot" href={app.shot} data-caption={app.shotCaption}>
-                <img src={app.shot} alt={app.shotCaption} loading="lazy" />
-              </a>
-              <figcaption class="label">{app.shotCaption}</figcaption>
-            </figure>
-          ))}
+        {shotApps.map((app) => (
+          <figure>
+            <a class="shot" href={fullShots[app.id]} data-caption={app.shotCaption}>
+              <Image
+                src={app.shot}
+                alt={app.shotCaption}
+                width={470}
+                densities={[1, 2]}
+                format="webp"
+                quality={72}
+                loading="lazy"
+              />
+            </a>
+            <figcaption class="label">{app.shotCaption}</figcaption>
+          </figure>
+        ))}
       </section>
 
       <dialog id="lightbox" aria-label="Screenshot viewer">

@@ -4,8 +4,13 @@
 // at build time — the real version comes from the API (see src/lib/releases.js).
 // `hasReleases: false` means the repo has no published release yet, so the card
 // links to source instead of a download.
-// `shot: null` means there is no screenshot for that app yet, and it is simply
-// left out of the figure row.
+// `shot` is an imported image, so Astro resizes it and converts it to WebP at
+// build time; `shot: null` leaves that app out of the figure row.
+
+import tracerShot from '../assets/shots/tracer.png';
+import nednetShot from '../assets/shots/nednet.png';
+import gliaShot from '../assets/shots/glia.png';
+import asterismShot from '../assets/shots/asterism.png';
 
 export const ORG = 'EpilepsyCenter';
 
@@ -24,7 +29,7 @@ export const apps = [
     blurb:
       'Patch-clamp and field-recording analysis. Opens HEKA and Axon files directly, runs the analyses you actually use, and exports publication figures.',
     chips: ['Events', 'Kinetics', 'I–V', 'Action potentials', 'Cohort stats'],
-    shot: '/shots/tracer.png',
+    shot: tracerShot,
     shotCaption: 'TRACER — burst detection on a field recording',
   },
   {
@@ -41,7 +46,7 @@ export const apps = [
     blurb:
       'Seizure and interictal spike detection in long-term rodent EEG. Rule-based detectors and a trained U-Net, with review, retraining, and per-project statistics.',
     chips: ['EDF', 'U-Net', 'Review', 'Batch', 'Group statistics'],
-    shot: '/shots/nednet.png',
+    shot: nednetShot,
     shotCaption: 'NED-Net — reviewing detected seizures as training data',
   },
   {
@@ -58,7 +63,7 @@ export const apps = [
     blurb:
       'Microglia morphology and astrocyte network analysis. FIJI does the segmentation, Python does the features, clustering and inflammation scoring — no R required.',
     chips: ['36 features', 'Clustering', 'Inflammation index', 'GFAP'],
-    shot: '/shots/glia.png',
+    shot: gliaShot,
     shotCaption: 'GliaAnalysis — PCA and clustering of microglia morphology',
   },
   {
@@ -75,7 +80,7 @@ export const apps = [
     blurb:
       'Statistics and graphing for the bench. Takes the exports from the three tools above, keeps track of which animal each number came from, and makes the figure.',
     chips: ['ANOVA', 'Repeated measures', 'Vector export', 'Figure sets'],
-    shot: '/shots/asterism.png',
+    shot: asterismShot,
     shotCaption: 'ASTERISM — SuperPlot with a nested t test',
   },
 ];
