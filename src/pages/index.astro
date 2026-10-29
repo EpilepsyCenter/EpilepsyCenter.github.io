@@ -85,14 +85,14 @@ const description =
       </section>
 
       <section class="shots">
-        <figure>
-          <img src="/shots/tracer.png" alt="TRACER showing burst detection on a continuous field recording" loading="lazy" />
-          <figcaption class="label">TRACER — burst detection on a field recording</figcaption>
-        </figure>
-        <figure>
-          <img src="/shots/nednet.png" alt="NED-Net showing a multi-channel EEG viewer with detected events" loading="lazy" />
-          <figcaption class="label">NED-Net — multi-channel EEG viewer</figcaption>
-        </figure>
+        {apps
+          .filter((app) => app.shot)
+          .map((app) => (
+            <figure>
+              <img src={app.shot} alt={app.shotCaption} loading="lazy" />
+              <figcaption class="label">{app.shotCaption}</figcaption>
+            </figure>
+          ))}
       </section>
 
       <Footer />
@@ -159,7 +159,9 @@ const description =
   .join { height: 34px; }
   .join path { fill: none; stroke: var(--accent); stroke-width: 1.25; opacity: 0.6; }
 
-  .shots { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 54px 0 0; }
+  /* One figure per app that has a screenshot — three of four today.
+     If GliaAnalysis gains one, move this to a 2x2 rather than a row of four. */
+  .shots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 54px 0 0; }
   figure { margin: 0; }
   figure img {
     width: 100%;
