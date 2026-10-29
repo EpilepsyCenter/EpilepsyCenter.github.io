@@ -42,7 +42,7 @@ export const apps = [
       'Seizure and interictal spike detection in long-term rodent EEG. Rule-based detectors and a trained U-Net, with review, retraining, and per-project statistics.',
     chips: ['EDF', 'U-Net', 'Review', 'Batch', 'Group statistics'],
     shot: '/shots/nednet.png',
-    shotCaption: 'NED-Net — multi-channel EEG viewer',
+    shotCaption: 'NED-Net — reviewing detected seizures as training data',
   },
   {
     id: 'glia',
