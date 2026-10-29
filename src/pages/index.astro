@@ -1,0 +1,180 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import AppCard from '../components/AppCard.astro';
+import TraceDivider from '../components/TraceDivider.astro';
+import { apps } from '../data/apps.js';
+import { resolveVersions } from '../lib/releases.js';
+
+const releases = await resolveVersions(apps);
+
+const title = 'Software — Epilepsy Center, Lund University';
+const description =
+  'Four free desktop applications from the Epilepsy Center at Lund University: electrophysiology, long-term EEG, glial morphology, and statistics. Everything runs locally.';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href="https://epilepsycenter.github.io/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content="https://epilepsycenter.github.io/" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div class="hero-zone">
+      <div class="wrap">
+        <Nav />
+
+        <header>
+          <div class="label"><span class="led"></span>Four tools · open source · free</div>
+          <h1>Analysis software, built <span>at the bench.</span></h1>
+          <p class="lede">
+            Electrophysiology, long-term EEG, glial morphology, and the statistics and figures at the
+            end of it. Each one runs entirely on your own machine — no account, no upload, no licence.
+          </p>
+          <div class="specs">
+            <div>Platforms <b>macOS · Windows · Linux</b></div>
+            <div>Licence <b>Open source</b></div>
+            <div>Data <b>Stays local</b></div>
+          </div>
+        </header>
+
+        <TraceDivider />
+      </div>
+    </div>
+
+    <main class="wrap">
+      <section id="tools">
+        <div class="section-head">
+          <span class="label">The tools</span>
+          <h2>Pick the one that matches your recording.</h2>
+        </div>
+
+        <div class="grid">
+          {apps.map((app) => <AppCard app={app} release={releases[app.id]} />)}
+        </div>
+      </section>
+
+      <section class="band">
+        <span class="label">How they fit together</span>
+        <h2>Three tools measure. One makes the figure.</h2>
+        <div class="flow">
+          <div class="node" style="--c: var(--tracer)"><b>TRACER</b><span>cohort summary</span></div>
+          <div class="node" style="--c: var(--nednet)"><b>NED-Net</b><span>results export</span></div>
+          <div class="node" style="--c: var(--glia)"><b>GliaAnalysis</b><span>per-cell features</span></div>
+          <svg class="join" viewBox="0 0 44 34" aria-hidden="true">
+            <path d="M2 17 H30 M24 11 L30 17 L24 23" />
+          </svg>
+          <div class="node" style="--c: var(--asterism)"><b>ASTERISM</b><span>stats · figures</span></div>
+        </div>
+      </section>
+
+      <section class="shots">
+        <figure>
+          <img src="/shots/tracer.png" alt="TRACER showing burst detection on a continuous field recording" loading="lazy" />
+          <figcaption class="label">TRACER — burst detection on a field recording</figcaption>
+        </figure>
+        <figure>
+          <img src="/shots/nednet.png" alt="NED-Net showing a multi-channel EEG viewer with detected events" loading="lazy" />
+          <figcaption class="label">NED-Net — multi-channel EEG viewer</figcaption>
+        </figure>
+      </section>
+
+      <Footer />
+    </main>
+  </body>
+</html>
+
+<style>
+  /* Oscilloscope grid behind the hero — the grid inside TRACER's own mark. */
+  .hero-zone { position: relative; overflow: hidden; }
+  .hero-zone::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(to right, rgba(21, 24, 31, 0.055) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(21, 24, 31, 0.055) 1px, transparent 1px);
+    background-size: 36px 36px;
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, 0.55) 55%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, 0.55) 55%, transparent 100%);
+  }
+
+  header { padding: 68px 0 0; position: relative; }
+  h1 {
+    font-weight: 600;
+    font-size: 60px;
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    margin: 18px 0 0;
+    max-width: 15ch;
+  }
+  h1 span { color: var(--accent); }
+
+  .lede { font-size: 18px; line-height: 1.65; color: var(--ink-soft); max-width: 60ch; margin: 26px 0 0; }
+
+  .specs { display: flex; gap: 28px; margin: 34px 0 0; flex-wrap: wrap; }
+  .specs div {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .specs b { color: var(--ink); font-weight: 500; }
+
+  .section-head { display: flex; align-items: baseline; gap: 14px; margin: 10px 0 0; flex-wrap: wrap; }
+  .section-head h2 { font-size: 15px; font-weight: 600; margin: 0; letter-spacing: -0.01em; }
+
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 22px 0 0; }
+
+  .band { margin: 58px 0 0; padding: 32px 0 0; border-top: 1px solid var(--rule); }
+  .band h2 { font-size: 30px; font-weight: 600; letter-spacing: -0.028em; margin: 14px 0 0; max-width: 20ch; }
+  .flow { display: grid; grid-template-columns: 1fr 1fr 1fr 44px 1fr; gap: 12px; align-items: center; margin: 30px 0 0; }
+  .node {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 9px;
+    padding: 14px 16px;
+    border-left: 3px solid var(--c);
+  }
+  .node b { display: block; font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
+  .node span { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.05em; color: var(--muted); }
+  .join { height: 34px; }
+  .join path { fill: none; stroke: var(--accent); stroke-width: 1.25; opacity: 0.6; }
+
+  .shots { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 54px 0 0; }
+  figure { margin: 0; }
+  figure img {
+    width: 100%;
+    display: block;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    object-position: top left;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+  }
+  figcaption { margin: 12px 0 0; }
+
+  @media (max-width: 860px) {
+    h1 { font-size: 40px; }
+    .grid, .flow, .shots { grid-template-columns: 1fr; }
+    .join { display: none; }
+  }
+</style>

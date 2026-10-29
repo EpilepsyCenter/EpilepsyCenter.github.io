@@ -1,0 +1,22 @@
+---
+import { ORG } from '../data/apps.js';
+---
+
+<nav>
+  <span class="here">Epilepsy Center · Lund University</span>
+  <a href="#tools">Software</a>
+  <a href="#cite">Cite</a>
+  <a href={`https://github.com/${ORG}`}>GitHub</a>
+</nav>
+
+<style>
+  nav { display: flex; align-items: center; gap: 24px; padding: 24px 0; font-size: 14px; position: relative; }
+  .here { font-weight: 600; margin-right: auto; letter-spacing: -0.01em; }
+  a { color: var(--muted); text-decoration: none; }
+  a:hover { color: var(--ink); }
+
+  @media (max-width: 560px) {
+    nav { gap: 16px; flex-wrap: wrap; }
+    .here { flex-basis: 100%; margin-right: 0; }
+  }
+</style>

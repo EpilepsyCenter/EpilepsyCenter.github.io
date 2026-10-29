@@ -1,0 +1,29 @@
+---
+import { ORG } from '../data/apps.js';
+---
+
+<footer id="cite">
+  <p>
+    Free and open source. If one of these tools contributed to a published analysis, please cite it —
+    each repository carries its citation details.
+  </p>
+  <p class="org">
+    Epilepsy Center, Department of Clinical Sciences, Lund University ·
+    <a href={`https://github.com/${ORG}`}>github.com/{ORG}</a>
+  </p>
+</footer>
+
+<style>
+  footer {
+    margin: 58px 0 0;
+    padding: 26px 0 64px;
+    border-top: 1px solid var(--rule);
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.75;
+  }
+  p { margin: 0; max-width: 70ch; }
+  .org { margin-top: 6px; }
+  a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--rule); }
+  a:hover { border-color: var(--rule-strong); }
+</style>

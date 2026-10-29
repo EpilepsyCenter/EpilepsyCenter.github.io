@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="95 -191 158 136" role="img" aria-label="ASTERISM">
+  <polyline points="104.14,-111.50 134.14,-129.50 164.14,-137.50 194.14,-145.50 230.14,-141.50 230.14,-181.50 196.14,-181.50 194.14,-145.50" fill="none" stroke="#15171b" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="104.14" cy="-111.50" r="7" fill="#15171b"/>
+  <circle cx="134.14" cy="-129.50" r="7" fill="#15171b"/>
+  <circle cx="164.14" cy="-137.50" r="7" fill="#15171b"/>
+  <circle cx="194.14" cy="-145.50" r="7" fill="#15171b"/>
+  <circle cx="230.14" cy="-141.50" r="7" fill="#15171b"/>
+  <circle cx="230.14" cy="-181.50" r="7" fill="#15171b"/>
+  <circle cx="196.14" cy="-181.50" r="7" fill="#15171b"/>
+  <circle cx="230.14" cy="-127.50" r="2.5" fill="#007d93"/>
+  <circle cx="230.14" cy="-116.50" r="2.5" fill="#007d93"/>
+  <circle cx="230.14" cy="-105.50" r="2.5" fill="#007d93"/>
+  <path d="M230.14 -97.10L232.94 -82.30L247.74 -79.50L232.94 -76.70L230.14 -61.90L227.34 -76.70L212.54 -79.50L227.34 -82.30L230.14 -97.10Z" fill="#007d93"/>
+</svg>

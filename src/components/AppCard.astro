@@ -1,0 +1,106 @@
+---
+import Sparkline from './Sparkline.astro';
+import { ORG } from '../data/apps.js';
+
+const { app, release } = Astro.props;
+const source = `https://github.com/${ORG}/${app.repo}`;
+---
+
+<article class="card" style={`--c: ${app.colour}`}>
+  <div class="top">
+    <span class="tile"><img src={app.mark} alt="" width="28" height="28" loading="lazy" /></span>
+    <div>
+      <h3>{app.name}</h3>
+      <div class="kind">{app.kind}</div>
+    </div>
+    <span class="ver">{release.version ?? 'Source'}</span>
+  </div>
+
+  <p>{app.blurb}</p>
+
+  <ul class="chips">
+    {app.chips.map((chip) => <li class="chip">{chip}</li>)}
+  </ul>
+
+  <Sparkline type={app.spark} />
+
+  <div class="spacer"></div>
+
+  <div class="act">
+    {app.hasReleases
+      ? <a class="btn btn-primary" href={release.url}>Download</a>
+      : <a class="btn" href={source}>View source</a>}
+    {app.website && <a class="btn" href={app.website}>Website</a>}
+    {app.hasReleases && <a class="btn" href={source}>Source</a>}
+  </div>
+</article>
+
+<style>
+  .card {
+    position: relative;
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.15s;
+  }
+
+  /* Corner brackets, shaped like the measurement cursors in the apps. */
+  .card::before,
+  .card::after {
+    content: '';
+    position: absolute;
+    width: 11px;
+    height: 11px;
+    opacity: 0.45;
+    transition: opacity 0.15s;
+  }
+  .card::before { top: 9px; left: 9px; border-left: 1.5px solid var(--c); border-top: 1.5px solid var(--c); }
+  .card::after { bottom: 9px; right: 9px; border-right: 1.5px solid var(--c); border-bottom: 1.5px solid var(--c); }
+  .card:hover { border-color: var(--rule-strong); }
+  .card:hover::before,
+  .card:hover::after { opacity: 1; }
+
+  .top { display: flex; align-items: center; gap: 13px; }
+  .tile {
+    width: 46px; height: 46px;
+    border-radius: 9px;
+    flex: none;
+    display: flex; align-items: center; justify-content: center;
+    background: color-mix(in srgb, var(--c) 9%, #fff);
+  }
+  .tile img { display: block; width: 28px; height: 28px; }
+
+  h3 { font-size: 20px; font-weight: 600; margin: 0; letter-spacing: -0.02em; }
+  .kind {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--c);
+    margin-top: 3px;
+  }
+  .ver {
+    margin-left: auto;
+    align-self: flex-start;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  p { font-size: 15px; line-height: 1.6; color: var(--ink-soft); margin: 16px 0 0; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 16px 0 0; padding: 0; list-style: none; }
+  .chip {
+    font-size: 12px;
+    color: var(--muted);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 3px 8px;
+  }
+
+  .spacer { flex: 1; }
+  .act { display: flex; gap: 9px; margin: 18px 0 0; padding-top: 18px; border-top: 1px solid var(--rule); }
+</style>

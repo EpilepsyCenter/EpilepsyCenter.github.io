@@ -1,0 +1,28 @@
+---
+// A one-line signature of what each app looks at: action potentials for TRACER,
+// a seizure riding on EEG baseline for NED-Net, a Sholl profile for
+// GliaAnalysis, paired bars for ASTERISM. Decorative, so aria-hidden.
+const { type } = Astro.props;
+
+const paths = {
+  ap: 'M0 20 H60 C66 20 68 20 70 11 L73 3 C74 1 76 1 77 3 L81 24 C83 26 85 26 86 24 L90 20 H180 C186 20 188 20 190 11 L193 3 C194 1 196 1 197 3 L201 24 C203 26 205 26 206 24 L210 20 H400',
+  eeg: 'M0 13 L20 11 L34 15 L50 12 L64 14 L80 13 L96 4 L104 22 L112 5 L120 21 L128 6 L136 23 L144 7 L152 20 L160 5 L168 22 L176 8 L184 19 L192 6 L200 21 L208 10 L224 13 L240 12 L258 14 L274 11 L290 14 L310 12 L330 13 L400 13',
+  sholl: 'M0 24 C40 24 60 4 100 4 C140 4 150 18 190 18 C230 18 250 8 290 8 C330 8 350 22 400 22',
+  bars: 'M30 24 V9 M30 9 H70 V24 M110 24 V14 M110 14 H150 V24 M190 24 V5 M190 5 H230 V24 M270 24 V17 M270 17 H310 V24',
+};
+---
+
+<svg class="spark" viewBox="0 0 400 26" preserveAspectRatio="none" aria-hidden="true">
+  <path d={paths[type]} />
+</svg>
+
+<style>
+  .spark { display: block; width: 100%; height: 26px; margin: 18px 0 0; }
+  .spark path {
+    fill: none;
+    stroke: var(--c);
+    stroke-width: 1.2;
+    opacity: 0.4;
+    vector-effect: non-scaling-stroke;
+  }
+</style>
