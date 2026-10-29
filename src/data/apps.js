@@ -58,8 +58,8 @@ export const apps = [
     blurb:
       'Microglia morphology and astrocyte network analysis. FIJI does the segmentation, Python does the features, clustering and inflammation scoring — no R required.',
     chips: ['36 features', 'Clustering', 'Inflammation index', 'GFAP'],
-    shot: null,
-    shotCaption: null,
+    shot: '/shots/glia.png',
+    shotCaption: 'GliaAnalysis — PCA and clustering of microglia morphology',
   },
   {
     id: 'asterism',
