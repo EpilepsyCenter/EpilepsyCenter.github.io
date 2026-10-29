@@ -42,7 +42,7 @@ export const apps = [
     spark: 'eeg',
     hasReleases: true,
     fallbackVersion: 'v2.0.0',
-    website: null,
+    website: 'https://epilepsycenter.github.io/NED-Net/',
     blurb:
       'Seizure and interictal spike detection in long-term rodent EEG. Rule-based detectors and a trained U-Net, with review, retraining, and per-project statistics.',
     chips: ['EDF', 'U-Net', 'Review', 'Batch', 'Group statistics'],
