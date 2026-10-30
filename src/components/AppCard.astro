@@ -22,6 +22,12 @@ const source = `https://github.com/${ORG}/${app.repo}`;
     {app.chips.map((chip) => <li class="chip">{chip}</li>)}
   </ul>
 
+  <p class="licence">
+    {app.licence
+      ? <>Licence <b>{app.licence}</b></>
+      : <>Licence <b>none yet</b> — reuse terms not set</>}
+  </p>
+
   <Sparkline type={app.spark} />
 
   <div class="spacer"></div>
@@ -62,6 +68,19 @@ const source = `https://github.com/${ORG}/${app.repo}`;
   .card:hover { border-color: var(--rule-strong); }
   .card:hover::before,
   .card:hover::after { opacity: 1; }
+
+  /* The four tools are not under one licence, so each card carries its own
+     rather than the page making a single claim for all of them. */
+  .licence {
+    margin: 14px 0 0;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .licence b { color: var(--ink-soft); font-weight: 500; }
 
   .top { display: flex; align-items: center; gap: 13px; }
   .tile {
