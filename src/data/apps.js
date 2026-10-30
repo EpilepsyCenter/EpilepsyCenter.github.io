@@ -7,9 +7,9 @@
 // `shot` is an imported image, so Astro resizes it and converts it to WebP at
 // build time; `shot: null` leaves that app out of the figure row.
 // `licence` is the tool's actual licence, which is not the same across the
-// four: NED-Net is GPL-3.0, TRACER and ASTERISM are PolyForm Noncommercial,
-// and GliaAnalysis has no licence file yet. `licence: null` says so plainly
-// rather than implying terms that do not exist.
+// four: NED-Net and GliaAnalysis are GPL-3.0, TRACER and ASTERISM are PolyForm
+// Noncommercial. `licence: null` would say plainly that a tool has no licence
+// file, rather than implying terms that do not exist.
 
 import tracerShot from '../assets/shots/tracer.png';
 import nednetShot from '../assets/shots/nednet.png';
@@ -61,11 +61,11 @@ export const apps = [
     kind: 'Imaging',
     repo: 'GliaAnalysis',
     colour: 'var(--glia)',
-    mark: '/marks/glia.png',
+    mark: '/marks/glia.svg',
     spark: 'sholl',
-    hasReleases: false,
-    fallbackVersion: null,
-    licence: null,
+    hasReleases: true,
+    fallbackVersion: 'v1.0.0',
+    licence: 'GPL-3.0',
     website: null,
     blurb:
       'Microglia morphology and astrocyte network analysis. FIJI does the segmentation, Python does the features, clustering and inflammation scoring — no R required.',
